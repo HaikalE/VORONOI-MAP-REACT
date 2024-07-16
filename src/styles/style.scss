@@ -1,0 +1,358 @@
+@import "pretty-checkbox";
+
+// GLOBAL
+body {
+  margin: 0;
+  font-size: 14px;
+  font-family: "Lato", "Helvetica Neue", "Arial" ,"Helvetica", sans-serif !important;
+  background: #f4f4f4;
+}
+
+// HOMEPAGE
+// CONTAINER
+.container {
+  max-width: 600px;
+  padding: 10px;
+  margin: 0 auto;
+
+  // LIST OF COUNTRIES
+  &.home .country-list {
+    a {
+      display: inline-block;
+      background-color: #fff;
+      padding: 0 15px;
+      margin-bottom: 12px;
+      text-decoration: none;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+      width: calc(50% - 38px);
+
+      &:nth-of-type(odd) {
+        margin-right: 6px;
+      }
+
+      &:nth-of-type(even) {
+        margin-left: 6px;
+      }
+
+      &:hover {
+        border-color: #999;
+      }
+
+      @media(max-width: 500px) {
+        width: calc(100% - 32px);
+        margin: 0 0 12px 0 !important;
+      }
+    }
+
+    img {
+      width: 50px;
+      display: inline-block;
+      vertical-align: middle;
+      margin-right: 10px;
+
+      &.icon {
+        height: 30px;
+        padding: 10px 0;
+      }
+    }
+
+    .text {
+      vertical-align: middle;
+      color: #000;
+      font-size: 20px;
+    }
+  }
+
+  &.faq {
+    h1 {
+      margin-bottom: .25rem;
+    }
+
+    .question {
+      font-weight: bold;
+      margin-bottom: .25rem;
+    }
+
+    .answer {
+      margin-top: 0;
+      margin-bottom: 2rem;
+    }
+  }
+
+  &.contribute {
+    h1 {
+      margin-bottom: .25rem;
+    }
+  }
+}
+
+// COUNTRY PAGE
+// NAVBAR
+nav {
+  overflow: auto;
+  position: relative;
+  width: 250px;
+  transition: margin .3s;
+  height: calc(100vh - 48px);
+  margin-top: 48px;
+  margin-left: -255px;
+  background: #fff;
+  z-index: 1001;
+  box-shadow: 0px 0px 2px 0px rgba(0,0,0,0.5);
+
+  &.visible {
+    margin-left: 0;
+  }
+
+  .pretty.p-switch {
+    padding: 16px 15px;
+    width: calc(100% - 30px);
+    border-bottom: 1px solid #efefef;
+  }
+
+  img.icon {
+    width: 16px;
+    padding: 0 7px;
+    position: absolute;
+    transition: transform .3s;
+  }
+
+  .menu-entry {
+    text-decoration: none;
+    color: #000;
+    padding: 15px;
+    border-bottom: 1px solid #f4f4f4;
+    width: calc(100% - 30px);
+    display: block;
+
+    .text {
+      margin-left: 36px;
+    }
+  }
+
+  .title {
+    display: none;
+    font-weight: bold;
+    background-color: #aa4343;
+    text-align: center;
+    color: #fff;
+    height: 18px;
+  }
+}
+
+.switch-wrapper:hover,
+a.menu-entry:not(.title):hover,
+#toggle-countries:hover {
+  background-color: #f4f4f4;
+  cursor: pointer;
+}
+
+#toggle-countries {
+  border-top: 2px solid #f4f4f4;
+
+  &.open img.icon {
+    transform: rotate(.5turn);
+  }
+}
+
+
+#country-list:not(.visible) {
+  display: none;
+}
+
+#burger {
+  height: 48px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 48px;
+  z-index: 9999999;
+
+  span {
+    background-color: #fff;
+    display: block;
+    height: 1px;
+    left: calc(50% - 8px);
+    position: absolute;
+    transform-origin: center;
+    transition-duration: .3s;
+    transition-property: background-color,opacity,transform;
+    transition-timing-function: ease-out;
+    width: 16px;
+
+    &:nth-child(1) {
+      top: calc(50% - 6px);
+    }
+
+    &:nth-child(2) {
+      top: calc(50% - 1px);
+    }
+
+    &:nth-child(3) {
+      top: calc(50% + 4px);
+    }
+  }
+
+  &.visible span {
+    &:nth-child(1) {
+      transform: translateY(5px) rotate(45deg);
+    }
+
+    &:nth-child(2) {
+      opacity: 0;
+    }
+
+    &:nth-child(3) {
+      transform: translateY(-5px) rotate(-45deg);
+    }
+  }
+}
+
+// MAP OVERLAY WHEN MENU IS OPEN
+#menu-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: #000;
+  opacity: 0;
+  display: block;
+  z-index: 1000;
+  pointer-events: none;
+  transition: opacity .3s;
+  width: 0;
+  height: 0;
+
+  &.visible {
+    pointer-events: all;
+    opacity: .5;
+    width: 100%;
+    height: 100vh;
+  }
+}
+
+// SELECTED BAR
+#selected {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 48px;
+  line-height: 48px;
+  font-size: 16px;
+  width: 100%;
+  z-index: 1000;
+  text-align: center;
+  background: #8c1414;
+  color: #fff;
+  box-shadow: 0px 0px 2px 0px rgba(0,0,0,0.5);
+}
+
+// MAP
+#map {
+  position:absolute;
+  left: 0;
+  top: 48px;
+  bottom: 0;
+  width: 100%;
+
+  circle {
+    &.primary {
+      fill: #428bca;
+    }
+
+    &.success {
+      fill: #5cb85c;
+    }
+
+    &.info {
+      fill: #bd5db7;
+    }
+
+    &.warning {
+      fill: #f0ad4e;
+    }
+
+    &.danger {
+      fill: #d9534f;
+    }
+  }
+}
+
+.leaflet-overlay-pane path {
+  cursor: pointer;
+}
+
+.leaflet-pane > svg path {
+  pointer-events: all;
+}
+
+.point-cell {
+  fill: none;
+  pointer-events: all;
+  stroke: #000;
+  stroke-opacity: .25;
+
+  &:hover {
+    stroke-opacity: .5;
+    stroke-width: 2px;
+  }
+
+  &.selected {
+    stroke-opacity: 1;
+    stroke-width: 2px;
+    fill: black;
+    fill-opacity: 0.1;
+  }
+}
+
+.point circle {
+  pointer-events: none;
+}
+
+.show-country.button {
+  background-color: #fff;
+  border-radius: 2px;
+  box-shadow: 0px 0px 0px 2px rgba(0,0,0,0.2);
+  cursor: pointer;
+  height: 30px;
+  margin-left: 12px;
+  text-align: center;
+  width: 30px;
+
+  &:hover {
+    background-color: #f4f4f4;
+  }
+
+  img {
+    margin-top: 5px;
+    width: 20px;
+  }
+}
+
+// LARGE SCREEN TWEAKS
+@media (min-width: 1024px) {
+  #burger,
+  #menu-overlay {
+    display: none;
+  }
+
+  nav#nav {
+    margin-left: 0;
+    height: 100vh;
+    margin-top: 0;
+  }
+
+  #selected {
+    width: calc(100% - 250px);
+    margin-left: 250px;
+  }
+
+  #map {
+    width: calc(100% - 250px);
+    margin-left: 250px;
+  }
+
+  nav .title {
+    display: block !important;
+  }
+}
