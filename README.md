@@ -1,6 +1,6 @@
 Sure! Here’s a full `README.md` template for your Voronoi map project using OpenMap in React:
 
-```markdown
+
 # VORONOI-MAP-REACT
 
 A React project for creating Voronoi maps using OpenMap. This repository serves as a guide to help you implement Voronoi diagrams for geographical data visualization.
