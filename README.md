@@ -1,6 +1,3 @@
-Sure! Here’s a full `README.md` template for your Voronoi map project using OpenMap in React:
-
-
 # VORONOI-MAP-REACT
 
 A React project for creating Voronoi maps using OpenMap. This repository serves as a guide to help you implement Voronoi diagrams for geographical data visualization.
@@ -91,6 +88,6 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 - [OpenStreetMap](https://www.openstreetmap.org/) for map tiles
 
 Feel free to customize this README to better fit your project's specifics!
-```
+
 
 You can modify the sections according to your needs or add more details as your project evolves!
