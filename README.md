@@ -19,7 +19,7 @@ A React project for creating Voronoi maps using OpenMap. This repository serves 
 To get started, clone the repository and install the necessary dependencies:
 
 ```bash
-git clone https://github.com/your-username/VORONOI-MAP-REACT.git
+git clone https://github.com/HaikalE/VORONOI-MAP-REACT.git
 cd VORONOI-MAP-REACT
 npm install
 ```
